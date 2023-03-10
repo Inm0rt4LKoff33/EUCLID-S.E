@@ -9,7 +9,7 @@ public class Player : MonoBehaviour {
 		public float speed = 600.0f;
 		public float turnSpeed = 400.0f;
 		private Vector3 moveDirection = Vector3.zero;
-		public float gravity = 20.0f;
+		public float gravity = Physics.gravity.y;
 
 		void Start () {
 			controller = GetComponent <CharacterController>();
