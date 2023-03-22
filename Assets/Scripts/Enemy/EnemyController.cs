@@ -11,7 +11,7 @@ public class EnemyController : MonoBehaviour
     [SerializeField]
     public float interval;
     // *** The time limit, stores the game runtime from a specific moment
-    float timer;
+    public float timer;
     // The NavMeshAgent allows the gameobject to move around an specific delimited plane
     public NavMeshAgent agent;
 
@@ -22,19 +22,15 @@ public class EnemyController : MonoBehaviour
     {
         agent = GetComponent<NavMeshAgent>();
     }
-
     void Start()
     {
         currentState = Chasing;
         currentState.EnterState(this);
     }
-
-    // Update is called once per frame
     void Update()
-    { 
-
+    {
+        currentState.UpdateState(this);
     }
-
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
