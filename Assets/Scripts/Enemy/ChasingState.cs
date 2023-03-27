@@ -11,12 +11,8 @@ public class ChasingState : EnemyBaseState
 
     public override void UpdateState(EnemyController state)
     {
-        state.timer += Time.deltaTime;
-        if (state.timer >= state.interval)
-        {
-            Debug.Log("Start Chasing");
-            state.agent.destination = state.target.position;
-        }
+        Debug.Log("Start Chasing");
+        state.agent.destination = state.target.position;
     }
 
     public override void OnCollisionEnter(EnemyController state)
