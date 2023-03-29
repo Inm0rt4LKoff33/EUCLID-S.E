@@ -18,69 +18,28 @@ public class EnemyController : MonoBehaviour
     // States Machine Interface
     public EnemyBaseState currentState;
     // States Classes
-    public WanderingState Wandering;
+    public Wander Wander;
     public ChasingState Chasing;
-    // Flags to change states
-    bool isWandering;
-    bool isRotatingLeft = false;
-    bool isRotatingRight = false;
-    bool isWalking = false;
 
-    float moveSpeed = 3F;
-    float rotationSpeed = 100F;
+    public float moveSpeed;
+    public float rotationSpeed;
 
     void Awake()
     {
         agent = GetComponent<NavMeshAgent>();
-        Wandering = new WanderingState();
+        Wander = new Wander();
         Chasing = new ChasingState();
     }
 
     void Start()
     {
-        currentState = Wandering;
-        isWandering = false;
-        //if (isWandering) currentState.EnterState(this);
+        currentState = Wander;
+        currentState.EnterState(this);
     }
 
-    void Update()
+    private void Update()
     {
-        if (!isWandering) StartCoroutine(Movement());
-        if (isRotatingRight) transform.Rotate(transform.up * Time.deltaTime * rotationSpeed); 
-        if (isRotatingLeft) transform.Rotate(transform.up * Time.deltaTime * -rotationSpeed);
-        if (isWalking) transform.position += transform.forward * moveSpeed * Time.deltaTime;
-    }
-
-    public IEnumerator Movement()
-    {
-        int rotationTime = Random.Range(1, 3);
-        int rotationWait = Random.Range(1, 4);
-        int rotationLR = Random.Range(1, 2);
-        int walkWait = Random.Range(1, 4);
-        int walkTime = Random.Range(1, 5);
-
-        isWandering = true;
-        yield return new WaitForSeconds(walkWait);
-
-        isWalking = true;
-        yield return new WaitForSeconds(walkTime);
-        
-        isWalking = true;
-        yield return new WaitForSeconds(rotationWait);
-
-        if (rotationLR == 1)
-        {
-            isRotatingRight = true;
-            yield return new WaitForSeconds(rotationTime);
-            isRotatingRight = false;
-        }else
-        {
-            isRotatingLeft = true;
-            yield return new WaitForSeconds(rotationTime);
-            isRotatingLeft = false;
-
-        }
-        isWandering = false; 
+        currentState.UpdateState(this);
     }
 
     public void SwitchState(EnemyBaseState state)
