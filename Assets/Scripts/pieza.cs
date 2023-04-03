@@ -5,6 +5,7 @@ using UnityEngine.Rendering;
 
 public class pieza : MonoBehaviour
 {
+    [SerializeField]
     private Vector3 PosicionCorrecta;
     public bool Encajada;
     public bool Seleccionada;

@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 
 public class juego : MonoBehaviour
 {
+    [SerializeField]
     public Sprite[] Niveles;
 
     public GameObject MenuGanar;

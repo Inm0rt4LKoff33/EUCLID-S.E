@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class menu : MonoBehaviour
 {
+    [SerializeField]
     public void Jugar(int Nivel)
     {
         PlayerPrefs.SetInt("Nivel", Nivel);
