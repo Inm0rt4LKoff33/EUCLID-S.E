@@ -1,57 +1,197 @@
 using UnityEngine;
 using System.Collections;
+using UnityEngine.TextCore.Text;
 
 public class Player : MonoBehaviour {
 
-	private Animator anim;
+    [Header("Control y animaciones")]
+    private Animator anim;
 	private CharacterController controller;
 
-	public float speed = 600.0f;
-	public float turnSpeed = 400.0f;
-	private Vector3 moveDirection = Vector3.zero;
-	public float gravity = 20.0f;
 
-
+    [Header("Control de movimiento")]
 	float inputX;
 	float inputZ;
 	bool isMovePressed;
 
+    [SerializeField]
+    float walkFactor = 5.0F;
 
-    void Start () {
+    [SerializeField]
+    float rotationFactor = 10.0F;
+
+    [Header("Control de salto")]
+	[SerializeField]
+	float jumpForce = 5.0F;
+
+	[SerializeField]
+	float gravityMultiplier = 8.0F;
+
+	[SerializeField]
+	int maximunNumberOfJumps = 1;
+
+    [SerializeField]
+	float gravity;
+    float velocityGravity;
+    int numberOfJumps;
+    bool isJump;
+
+
+    void Awake () {
 		controller = GetComponent <CharacterController>();
 		anim = gameObject.GetComponentInChildren<Animator>();
-	}
+        gravity = Physics.gravity.y;
+    }
 
-	void Update (){
+
+    void Update (){
+
+        if (controller.isGrounded)
+        {
+            anim.SetBool("Jump", false);
+
+        }
+
 
 		//Detectar movimientos
 		handleInputs();
+        handleGravity();
+        handleMove();
+        handleRotation();
 
-		if (isMovePressed) {
-			anim.SetInteger ("AnimationPar", 1);
-		}  else {
-			anim.SetInteger ("AnimationPar", 0);
-		}
-
-		if(controller.isGrounded){
-			moveDirection = transform.forward * Input.GetAxis("Vertical") * speed;
-		}
-
-		float turn = Input.GetAxis("Horizontal");
-		transform.Rotate(0, turn * turnSpeed * Time.deltaTime, 0);
-		controller.Move(moveDirection * Time.deltaTime);
-		moveDirection.y -= gravity * Time.deltaTime;
-	}
-
+    }
 
 	void handleInputs()
 	{
 
 		inputX = Input.GetAxisRaw("Horizontal");
         inputZ = Input.GetAxisRaw("Vertical");
+        isJump = Input.GetButtonDown("Jump");
 
         //DETECTAR CUANDO SE ESTA MOVIENDO
         isMovePressed = inputX != 0.0F || inputZ != 0.0F;
 
+        animacionesMovimiento();
     }
+
+    //SALTO
+    void handleJump()
+    {
+        if (numberOfJumps > maximunNumberOfJumps)
+        {
+            return;
+        }
+
+        numberOfJumps++;
+        velocityGravity = jumpForce / numberOfJumps;
+        anim.SetBool("Jump", true);
+    }
+
+
+
+    void handleGravity()
+    {
+        bool isGrounded = IsGrounded();
+
+        if (isGrounded)
+        {
+             if (velocityGravity < -1.0F)
+            {
+                velocityGravity = -1.0F;
+            }
+
+            if (isJump)
+            {
+                handleJump();
+                StartCoroutine(WaitForGroundCorutine());
+            }
+        }
+        else
+        {
+
+            if (isJump && maximunNumberOfJumps > 1)
+            {
+                handleJump();
+            }
+            velocityGravity += gravity * gravityMultiplier * Time.deltaTime;
+        }
+
+
+    }
+
+    //MOVIMIENTO GENERAL
+    void handleMove()
+    {
+ 
+        // Obtener la dirección hacia adelante del objeto
+        Vector3 forward = transform.forward;
+
+        // Modificar la dirección para que ignore la componente y
+        forward.y = 0f;
+        forward.Normalize();
+
+        // Multiplicar la dirección hacia adelante por la entrada vertical
+        Vector3 moveDirection = forward * inputZ;
+
+        // Ajustar la velocidad según el factor de caminar/correr
+        moveDirection *= walkFactor;
+
+        // Ajustar la velocidad hacia abajo por la gravedad
+        moveDirection.y = velocityGravity;
+
+        // Mover al personaje utilizando el controlador de personajes
+        controller.Move(moveDirection * Time.deltaTime);
+    }
+
+    //ROTACION DEL PERSONAJE
+    void handleRotation()
+    {
+
+        float horizontalInput = Input.GetAxis("Horizontal");
+
+        if (isMovePressed)
+        {
+            if (!isJump && controller.isGrounded) {
+
+                if (horizontalInput != 0)
+                {
+                    transform.Rotate(Vector3.up, horizontalInput * rotationFactor * Time.deltaTime);
+                }
+            }
+
+        }
+    }
+
+    //DETECTAR CUANDO SE ESTA EN EL SUELO
+    bool IsGrounded()
+    {
+        return controller.isGrounded;
+    }
+
+    IEnumerator WaitForGroundCorutine()
+    {
+
+        yield return new WaitUntil(() => !IsGrounded());
+        yield return new WaitUntil(() => IsGrounded());
+        numberOfJumps = 0;
+
+    }
+
+
+    void animacionesMovimiento()
+    {
+
+        if (isMovePressed)
+        {
+            anim.SetInteger("AnimationPar", 1);
+        }
+        else
+        {
+            anim.SetInteger("AnimationPar", 0);
+        }
+
+
+    }
+
+
 }
