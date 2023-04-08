@@ -2940,7 +2940,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 852659875}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 7.21, y: 4.74, z: -10}
+  m_LocalPosition: {x: 7.04, y: 6.92, z: -47.56}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2994,7 +2994,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Niveles:
   - {fileID: 21300000, guid: 8dc7a2b9676471144a9cfaf9bc31deb8, type: 3}
-  MenuGanar: {fileID: 0}
+  MenuGanar: {fileID: 85732901}
   PiezaSeleccionada: {fileID: 0}
   PiezasEncajadas: 0
 --- !u!1 &867338600
@@ -5068,7 +5068,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1668508126}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.631, y: 3.58, z: 0.52}
+  m_LocalPosition: {x: 2.631, y: 3.89, z: 0.52}
   m_LocalScale: {x: 2.086095, y: 1.812676, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -6977,7 +6977,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2003775357}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 6.66, y: 4.53, z: 0.48}
+  m_LocalPosition: {x: 6.58, y: 4.64, z: 0.48}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
