@@ -57,21 +57,7 @@ public class juego : MonoBehaviour
             MenuGanar.SetActive(true);
         }
     }
-    public void SiguienteNivel()
-    {
-        if (PlayerPrefs.GetInt("Nivel") < Niveles.Length - 1)
-        {
-            PlayerPrefs.SetInt("Nivel", PlayerPrefs.GetInt("Nivel") + 1);
-        }
-        else
-        {
-            PlayerPrefs.SetInt("Nivel", 0);
-        }
-        SceneManager.LoadScene("Juego");
-    }
 
-    public void MenuPrincipal()
-    {
-        SceneManager.LoadScene("Menu");
-    }
+
+   
 }
