@@ -11,7 +11,7 @@ public class juego : MonoBehaviour
 
     public GameObject MenuGanar;
     public GameObject PiezaSeleccionada;
-    int capa = 1;
+    int capa = 0;
     public int PiezasEncajadas = 0;
 
     void Start()
