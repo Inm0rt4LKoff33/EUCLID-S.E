@@ -41,9 +41,13 @@ public class EnemyController : MonoBehaviour
     bool isPlayerOnRange;
     bool isTargetInAttackRange;
 
+    //Animator
+    [SerializeField]
+    Animator animator;
+
     AlienStates currentState;
     // The NavMeshAgent allows the gameobject to move around an specific delimited plane
-    public NavMeshAgent agent;
+    NavMeshAgent agent;
     Vector3 walkPoint;
 
     void Awake()
@@ -66,7 +70,7 @@ public class EnemyController : MonoBehaviour
                 HandleAttack();
                 break;
             case AlienStates.Chasing:
-                agent.SetDestination(target.position);
+                HandleChase();
                 break;
             case AlienStates.Wandering:
                 OnWandering();
@@ -74,21 +78,31 @@ public class EnemyController : MonoBehaviour
         }
     }
 
+    private void HandleChase()
+    {
+        agent.SetDestination(target.position);
+        animator.SetBool("isCrawling", true);
+    }
+
     private void HandleAttack()
     {
         agent.SetDestination(transform.position);
+        animator.SetBool("isCrawling", true);
+
         transform.LookAt(target);
 
         if (!isAttacking)
         {
             isAttacking = true;
             Invoke(nameof(ResetAttack), attackRate);
+            animator.SetBool("isAttacking", true);
         }
     }
 
     private void ResetAttack()
     {
         isAttacking = false;
+        animator.SetBool("isAttacking", false);
     }
 
     private void OnWandering()
@@ -99,6 +113,11 @@ public class EnemyController : MonoBehaviour
             if (isWalkPointSet)
             {
                 agent.SetDestination(walkPoint);
+                animator.SetBool("isCrawling", true);
+            }
+            else 
+            {
+                animator.SetBool("isCrawling", false);
             }
         }
         Vector3 distanceToWalkPoint = transform.position - walkPoint;
