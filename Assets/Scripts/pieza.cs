@@ -5,14 +5,16 @@ using UnityEngine.Rendering;
 
 public class pieza : MonoBehaviour
 {
-    [SerializeField]
     private Vector3 PosicionCorrecta;
     public bool Encajada;
     public bool Seleccionada;
 
     void Start()
     {
+        //LE DECIMOS LA POSICION ORIGINAL CORRECTA
         PosicionCorrecta = transform.position;
+
+        //LA CAMBIAMOS DE LUGAR PARA DESORDENARLA
         transform.position = new Vector3(Random.Range(5f, 11f), Random.Range(2.5f, -7));
     }
 
