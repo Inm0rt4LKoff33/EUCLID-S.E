@@ -42,7 +42,6 @@ public class EnemyController : MonoBehaviour
     bool isTargetInAttackRange;
 
     //Animator
-    [SerializeField]
     Animator animator;
 
     AlienStates currentState;
@@ -53,6 +52,7 @@ public class EnemyController : MonoBehaviour
     void Awake()
     {
         agent = GetComponent<NavMeshAgent>();
+        animator = GetComponent<Animator>();
     }
 
     void Update()
