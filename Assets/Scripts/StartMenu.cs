@@ -4,15 +4,20 @@ using UnityEngine;
 
 public class StartMenu : MonoBehaviour
 {
-    // Start is called before the first frame update
+
     void Start()
     {
-        
+        ponerMusicaInicial();
     }
 
-    // Update is called once per frame
-    void Update()
+    void ponerMusicaInicial()
     {
-        
+        //PARAMOS TODOS LOS SONIDOS EN CASO DE HABERLOR
+        AudioManager.Instance.stopAllSFX();
+        AudioManager.Instance.stopAllMusic();
+
+        //REPRODUCIMOS NUESTRA MUSICA
+        AudioManager.Instance.playMusic("Ms_Inicio");
     }
+
 }
