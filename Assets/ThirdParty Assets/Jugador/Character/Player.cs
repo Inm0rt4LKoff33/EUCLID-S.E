@@ -1,6 +1,8 @@
 using UnityEngine;
 using System.Collections;
 using UnityEngine.TextCore.Text;
+using System;
+using UnityEngine.UI;
 
 public class Player : MonoBehaviour {
 
@@ -36,20 +38,28 @@ public class Player : MonoBehaviour {
     int numberOfJumps;
     bool isJump;
 
+    [SerializeField]
+    Slider sanityBar;
+
+    public bool wasAttacked;
+    // Duración de la invulnerabilidad
+    [SerializeField]
+    float invulnerabiliySecs;
+    // Timer de la invulnerabilidad para volver a la normalidad
+    float invulnerabiliyCountdown;
 
     void Awake () {
 		controller = GetComponent <CharacterController>();
 		anim = gameObject.GetComponentInChildren<Animator>();
         gravity = Physics.gravity.y;
+        sanityBar.value = 100;
     }
-
 
     void Update (){
 
         if (controller.isGrounded)
         {
             anim.SetBool("Jump", false);
-
         }
 
 
@@ -59,9 +69,22 @@ public class Player : MonoBehaviour {
         handleMove();
         handleRotation();
 
+        if (invulnerabiliyCountdown > 0)
+        {
+            invulnerabiliyCountdown -= Time.deltaTime;
+        }
     }
 
-	void handleInputs()
+    IEnumerator TurnInvulnarable()
+    {
+        Debug.Log("Invencible >:D");
+        wasAttacked = false;
+        yield return new WaitForSeconds(5);
+        Debug.Log("Vulnerable...");
+
+    }
+
+    void handleInputs()
 	{
 
 		inputX = Input.GetAxisRaw("Horizontal");
@@ -86,8 +109,6 @@ public class Player : MonoBehaviour {
         velocityGravity = jumpForce / numberOfJumps;
         anim.SetBool("Jump", true);
     }
-
-
 
     void handleGravity()
     {
@@ -192,6 +213,25 @@ public class Player : MonoBehaviour {
 
 
     }
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Alien"))
+        {
+            if (invulnerabiliyCountdown <= 0)
+            {
+                // Quitar sanidad en el slider
+                sanityBar.value -= 20;
 
+                invulnerabiliyCountdown = invulnerabiliySecs;
+            }
+        }
+    }
 
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Alien"))
+        {
+            wasAttacked = false;
+        }
+    }
 }
