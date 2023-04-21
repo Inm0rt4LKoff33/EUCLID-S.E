@@ -40,8 +40,10 @@ public class Player : MonoBehaviour {
 
     [SerializeField]
     Slider sanityBar;
+    float maxSanity = 100;
+    float currentSanity;
 
-    public bool wasAttacked;
+    bool wasAttacked;
     // Duración de la invulnerabilidad
     [SerializeField]
     float invulnerabiliySecs;
@@ -52,7 +54,8 @@ public class Player : MonoBehaviour {
 		controller = GetComponent <CharacterController>();
 		anim = gameObject.GetComponentInChildren<Animator>();
         gravity = Physics.gravity.y;
-        sanityBar.value = 100;
+        sanityBar.value = maxSanity;
+        currentSanity = maxSanity;
     }
 
     void Update (){
@@ -69,19 +72,15 @@ public class Player : MonoBehaviour {
         handleMove();
         handleRotation();
 
+        Invulnerability();
+    }
+
+    private void Invulnerability()
+    {
         if (invulnerabiliyCountdown > 0)
         {
             invulnerabiliyCountdown -= Time.deltaTime;
         }
-    }
-
-    IEnumerator TurnInvulnarable()
-    {
-        Debug.Log("Invencible >:D");
-        wasAttacked = false;
-        yield return new WaitForSeconds(5);
-        Debug.Log("Vulnerable...");
-
     }
 
     void handleInputs()
