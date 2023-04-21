@@ -1,9 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class StartMenu : MonoBehaviour
 {
+    [SerializeField]
+    string gameScene;
 
     void Start()
     {
@@ -18,6 +21,11 @@ public class StartMenu : MonoBehaviour
 
         //REPRODUCIMOS NUESTRA MUSICA
         AudioManager.Instance.playMusic("Ms_Inicio");
+    }
+
+    public void StartGame()
+    {
+        SceneManager.LoadScene(gameScene);
     }
 
 }
