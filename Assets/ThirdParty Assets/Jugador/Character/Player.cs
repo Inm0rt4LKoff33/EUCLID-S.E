@@ -222,12 +222,4 @@ public class Player : MonoBehaviour {
             }
         }
     }
-
-    private void OnTriggerExit(Collider other)
-    {
-        if (other.CompareTag("Alien"))
-        {
-            wasAttacked = false;
-        }
-    }
 }
