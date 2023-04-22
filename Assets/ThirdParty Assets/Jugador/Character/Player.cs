@@ -41,9 +41,7 @@ public class Player : MonoBehaviour {
     [SerializeField]
     Slider sanityBar;
     float maxSanity = 100;
-    float currentSanity;
 
-    bool wasAttacked;
     // Duración de la invulnerabilidad
     [SerializeField]
     float invulnerabiliySecs;
@@ -55,7 +53,6 @@ public class Player : MonoBehaviour {
 		anim = gameObject.GetComponentInChildren<Animator>();
         gravity = Physics.gravity.y;
         sanityBar.value = maxSanity;
-        currentSanity = maxSanity;
     }
 
     void Update (){
