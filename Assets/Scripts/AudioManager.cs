@@ -19,6 +19,13 @@ public class AudioManager : Singleton<AudioManager>
     [SerializeField]
     AudioSource musicSource, sfxSource, sfxHitsEnemigosSource, sfxRecoleccionSource;
 
+    float volumenOriginalMusica;
+
+    void Start()
+    {
+       
+        audioMixerMusica.GetFloat("VolumenMusica", out volumenOriginalMusica);
+    }
 
     public void playMusic(string name)
     {
@@ -93,5 +100,13 @@ public class AudioManager : Singleton<AudioManager>
         sfxSource.Stop();
     }
 
+    public void stopAllSFXEnemies()
+    {
+        sfxHitsEnemigosSource.Stop();
+    }
+
+    public void stopAllSFXOtros() {
+        sfxRecoleccionSource.Stop();
+    }
 
 }

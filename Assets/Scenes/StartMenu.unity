@@ -217,8 +217,13 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1959740407949806698, guid: 147222cfb974ca44b973c6137e99c3de,
         type: 3}
-      propertyPath: sfxEnemigosSounds.Array.size
+      propertyPath: sfxSourceOtros.Array.size
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1959740407949806698, guid: 147222cfb974ca44b973c6137e99c3de,
+        type: 3}
+      propertyPath: sfxEnemigosSounds.Array.size
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1959740407949806698, guid: 147222cfb974ca44b973c6137e99c3de,
         type: 3}
@@ -232,6 +237,26 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1959740407949806698, guid: 147222cfb974ca44b973c6137e99c3de,
         type: 3}
+      propertyPath: musicSounds.Array.data[1].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: e319d34c9f87a2b429cebfaa943d7d8c, type: 3}
+    - target: {fileID: 1959740407949806698, guid: 147222cfb974ca44b973c6137e99c3de,
+        type: 3}
+      propertyPath: musicSounds.Array.data[1].name
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 1959740407949806698, guid: 147222cfb974ca44b973c6137e99c3de,
+        type: 3}
+      propertyPath: sfxSourceOtros.Array.data[0].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: e319d34c9f87a2b429cebfaa943d7d8c, type: 3}
+    - target: {fileID: 1959740407949806698, guid: 147222cfb974ca44b973c6137e99c3de,
+        type: 3}
+      propertyPath: sfxSourceOtros.Array.data[0].name
+      value: Sd_Breathing
+      objectReference: {fileID: 0}
+    - target: {fileID: 1959740407949806698, guid: 147222cfb974ca44b973c6137e99c3de,
+        type: 3}
       propertyPath: sfxEnemigosSounds.Array.data[0].clip
       value: 
       objectReference: {fileID: 8300000, guid: dd396664e9aae104b8f553a839eb4e04, type: 3}
@@ -240,10 +265,35 @@ PrefabInstance:
       propertyPath: sfxEnemigosSounds.Array.data[0].name
       value: Sd_EnemigoCerca
       objectReference: {fileID: 0}
+    - target: {fileID: 1959740407949806698, guid: 147222cfb974ca44b973c6137e99c3de,
+        type: 3}
+      propertyPath: sfxEnemigosSounds.Array.data[1].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: 04c60d5644f6db0408684b58e2df6fd6, type: 3}
+    - target: {fileID: 1959740407949806698, guid: 147222cfb974ca44b973c6137e99c3de,
+        type: 3}
+      propertyPath: sfxEnemigosSounds.Array.data[1].name
+      value: Sd_AlienScream
+      objectReference: {fileID: 0}
+    - target: {fileID: 1959740407949806698, guid: 147222cfb974ca44b973c6137e99c3de,
+        type: 3}
+      propertyPath: sfxEnemigosSounds.Array.data[2].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: e319d34c9f87a2b429cebfaa943d7d8c, type: 3}
+    - target: {fileID: 1959740407949806698, guid: 147222cfb974ca44b973c6137e99c3de,
+        type: 3}
+      propertyPath: sfxEnemigosSounds.Array.data[2].name
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 1959740407949806699, guid: 147222cfb974ca44b973c6137e99c3de,
         type: 3}
       propertyPath: m_Name
       value: AudioManager
+      objectReference: {fileID: 0}
+    - target: {fileID: 1959740408700257053, guid: 147222cfb974ca44b973c6137e99c3de,
+        type: 3}
+      propertyPath: Loop
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 147222cfb974ca44b973c6137e99c3de, type: 3}
@@ -444,7 +494,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
   m_ReferenceResolution: {x: 800, y: 600}
@@ -866,7 +916,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0.24528033, y: 1}
-  m_AnchoredPosition: {x: 0, y: -7.636}
+  m_AnchoredPosition: {x: 0, y: -7.6359863}
   m_SizeDelta: {x: -53.6185, y: -46.8593}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1658728086
@@ -941,10 +991,10 @@ RectTransform:
   m_Father: {fileID: 1331283614}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0.000015259}
-  m_SizeDelta: {x: 1163, y: 444}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 1.5}
+  m_SizeDelta: {x: 0, y: -3}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2062846352
 MonoBehaviour:
