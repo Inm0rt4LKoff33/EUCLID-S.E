@@ -48,6 +48,9 @@ public class Player : MonoBehaviour {
     // Timer de la invulnerabilidad para volver a la normalidad
     float invulnerabiliyCountdown;
 
+    // Flags
+    bool onCombat;
+
     void Awake () {
 		controller = GetComponent <CharacterController>();
 		anim = gameObject.GetComponentInChildren<Animator>();
@@ -69,7 +72,14 @@ public class Player : MonoBehaviour {
         handleMove();
         handleRotation();
 
-        Invulnerability();
+        if (onCombat)
+        {
+            Invulnerability();
+        }
+        else
+        {
+            StartCoroutine(RecoverSanity());
+        }
     }
 
     private void Invulnerability()
@@ -77,6 +87,17 @@ public class Player : MonoBehaviour {
         if (invulnerabiliyCountdown > 0)
         {
             invulnerabiliyCountdown -= Time.deltaTime;
+            onCombat = false;
+        }
+    }
+
+    IEnumerator RecoverSanity()
+    {
+        yield return new WaitForSeconds(7);
+
+        if (sanityBar.value < 100)
+        {
+            sanityBar.value += 5;
         }
     }
 
@@ -213,13 +234,22 @@ public class Player : MonoBehaviour {
     {
         if (other.CompareTag("Alien"))
         {
-            if (invulnerabiliyCountdown <= 0)
+            onCombat = true;
+            if (invulnerabiliyCountdown <= 0 && onCombat)
             {
                 // Quitar sanidad en el slider
                 sanityBar.value -= 20;
 
                 invulnerabiliyCountdown = invulnerabiliySecs;
             }
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Alien"))
+        {
+            onCombat = false;
         }
     }
 }
