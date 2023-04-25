@@ -16,7 +16,6 @@ public class screamerController : MonoBehaviour
 
     private void Start()
     {
-
         canvasGroup = screamerImage.GetComponent<CanvasGroup>();
 
         // Si el objeto Image no tiene un componente CanvasGroup, lo añade
@@ -69,7 +68,7 @@ public class screamerController : MonoBehaviour
     {
         AudioManager.Instance.playSFX("Sd_Breathing");
 
-        yield return new WaitForSeconds(3.2f);
+        yield return new WaitForSeconds(10);
 
         AudioManager.Instance.stopAllSFXOtros();
     }
