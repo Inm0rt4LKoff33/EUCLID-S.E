@@ -12,7 +12,7 @@ public class LoadSceneController : MonoBehaviour
 
     //List<GameObject> spawnPoints;
 
-    private void Start()
+    private void Awake()
     {
         currentScene = SceneManager.GetActiveScene();
     }
@@ -23,11 +23,11 @@ public class LoadSceneController : MonoBehaviour
         {
             if (currentScene.buildIndex == 1)
             {
-                SceneManager.LoadScene(currentScene.buildIndex - 1);
+                SceneManager.LoadScene(0);
             }
             else
             {
-                SceneManager.LoadScene(currentScene.buildIndex + 1);
+                SceneManager.LoadScene(1);
             }
         }
     }
