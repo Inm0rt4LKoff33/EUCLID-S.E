@@ -7,18 +7,22 @@ public class EnemyController : MonoBehaviour
     // Alien States
     enum AlienStates
     {
-        Wandering,
+        Patroling,
         Chasing,
         Attacking
     }
 
-    // Position that the Alien will try to reach
     [Header("Target")]
     [SerializeField]
     Transform target;
-    // Mask layer to detect the player
+
     [SerializeField]
     LayerMask playerMask;
+
+    [SerializeField]
+    Animator animator;
+
+    // Mask layer to detect the player
 
     [Header("Wandering")]
     [SerializeField]
@@ -26,43 +30,39 @@ public class EnemyController : MonoBehaviour
 
     // Variables for moving
     [SerializeField]
-    float walkPointRange;
+    float walkPointRange = 20;
     [SerializeField]
-    float sightRange;
+    float sightRange = 8;
 
     [Header("Attack")]
     [SerializeField]
-    float attackRange;
+    float attackRange = 1;
     [SerializeField]
-    float attackRate = 0.5F;
-    // Flags
-    bool isWalkPointSet;
-    bool isAttacking;
-    bool isPlayerOnRange;
-    bool isTargetInAttackRange;
+    float attackRate = 1;
 
-    //Animator
-    Animator animator;
-
-    AlienStates currentState;
-    // The NavMeshAgent allows the gameobject to move around an specific delimited plane
     NavMeshAgent agent;
     Vector3 walkPoint;
+
+    bool isWalkPointSet;
+    bool isAttacking;
+    bool isTargetOnSight;
+    bool isTargetInAttackRange;
+
+    AlienStates currentState;
 
     void Awake()
     {
         agent = GetComponent<NavMeshAgent>();
-        animator = GetComponent<Animator>();
     }
 
     void Update()
     {
-        isPlayerOnRange = Physics.CheckSphere(transform.position, sightRange, playerMask);
+        isTargetOnSight = Physics.CheckSphere(transform.position, sightRange, playerMask);
         isTargetInAttackRange = Physics.CheckSphere(transform.position, attackRate, playerMask);
 
-        currentState = isPlayerOnRange && isTargetInAttackRange ? AlienStates.Attacking :
-            isPlayerOnRange && !isTargetInAttackRange ? AlienStates.Chasing :
-            AlienStates.Wandering;
+        currentState = isTargetOnSight && isTargetInAttackRange ? AlienStates.Attacking :
+            isTargetOnSight && !isTargetInAttackRange ? AlienStates.Chasing :
+            AlienStates.Patroling;
 
         switch (currentState)
         {
@@ -72,10 +72,20 @@ public class EnemyController : MonoBehaviour
             case AlienStates.Chasing:
                 HandleChase();
                 break;
-            case AlienStates.Wandering:
-                OnWandering();
+            case AlienStates.Patroling:
+                HandlePatrol();
                 break;
         }
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.blue;
+        Gizmos.DrawWireSphere(transform.position, walkPointRange);
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireSphere(transform.position, sightRange);
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, attackRange);
     }
 
     private void HandleChase()
@@ -84,28 +94,7 @@ public class EnemyController : MonoBehaviour
         animator.SetBool("isCrawling", true);
     }
 
-    private void HandleAttack()
-    {
-        agent.SetDestination(transform.position);
-        animator.SetBool("isCrawling", true);
-
-        transform.LookAt(target);
-
-        if (!isAttacking)
-        {
-            isAttacking = true;
-            Invoke(nameof(ResetAttack), attackRate);
-            animator.SetBool("isAttacking", true);
-        }
-    }
-
-    private void ResetAttack()
-    {
-        isAttacking = false;
-        animator.SetBool("isAttacking", false);
-    }
-
-    private void OnWandering()
+    private void HandlePatrol()
     {
         if (!isWalkPointSet)
         {
@@ -115,10 +104,7 @@ public class EnemyController : MonoBehaviour
                 agent.SetDestination(walkPoint);
                 animator.SetBool("isCrawling", true);
             }
-            else 
-            {
-                animator.SetBool("isCrawling", false);
-            }
+            else animator.SetBool("isCrawling", false);
         }
         Vector3 distanceToWalkPoint = transform.position - walkPoint;
         if (distanceToWalkPoint.magnitude < 1)
@@ -143,13 +129,23 @@ public class EnemyController : MonoBehaviour
         }
     }
 
-    private void OnDrawGizmosSelected()
+    private void HandleAttack()
     {
-        Gizmos.color = Color.blue;
-        Gizmos.DrawWireSphere(transform.position, walkPointRange);
-        Gizmos.color = Color.yellow;
-        Gizmos.DrawWireSphere(transform.position, sightRange);
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, attackRange);
+        agent.SetDestination(transform.position);
+        animator.SetBool("isCrawling", false);
+        transform.LookAt(target);
+
+        if (!isAttacking)
+        {
+            isAttacking = true;
+            Invoke(nameof(ResetAttack), attackRate);
+            animator.SetBool("isAttacking", true);
+        }
+    }
+
+    private void ResetAttack()
+    {
+        isAttacking = false;
+        animator.SetBool("isAttacking", false);
     }
 }
