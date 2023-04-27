@@ -97,14 +97,17 @@ public class DialogueController : MonoBehaviour
             {
                 case 1:
                     lv.NextScene(3);
+                    recordadorManager.Instance.AgregarPuzzle(1);
                     break;
 
                 case 2:
                     lv.NextScene(4);
+                    recordadorManager.Instance.AgregarPuzzle(2);
                     break;
 
                 case 3:
                     lv.NextScene(5);
+                    recordadorManager.Instance.AgregarPuzzle(3);
                     break;
 
                 default:
