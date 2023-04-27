@@ -19,7 +19,6 @@ public class EnemyController : MonoBehaviour
     [SerializeField]
     LayerMask playerMask;
 
-    [SerializeField]
     Animator animator;
 
     // Mask layer to detect the player
@@ -32,7 +31,7 @@ public class EnemyController : MonoBehaviour
     [SerializeField]
     float walkPointRange = 20;
     [SerializeField]
-    float sightRange = 8;
+    float sightRange = 5;
 
     [Header("Attack")]
     [SerializeField]
@@ -53,6 +52,7 @@ public class EnemyController : MonoBehaviour
     void Awake()
     {
         agent = GetComponent<NavMeshAgent>();
+        animator = GetComponent<Animator>();
     }
 
     void Update()
