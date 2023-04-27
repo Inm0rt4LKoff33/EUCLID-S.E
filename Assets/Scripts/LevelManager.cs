@@ -34,4 +34,14 @@ public class LevelManager : MonoBehaviour
     }
 
 
+    /// <summary>
+    /// TREAR LA PRIMERA ESCENA
+    /// </summary>
+    public void NextScene(int numero)
+    {
+        SceneManager.LoadScene(numero);
+    }
+
+
+
 }

@@ -6,7 +6,13 @@ using TMPro;
 public class DialogueController : MonoBehaviour
 {
     [SerializeField]
+    int numeroPuzzle = 1;
+
+    [SerializeField]
     GameObject dialogueExclamation;
+
+    [SerializeField]
+    LevelManager lv;
 
     //TextArea: Se usa unicamente para mejorar la visualizacion de los campos a rellenar desde la UI de desarrollo.
 
@@ -34,20 +40,25 @@ public class DialogueController : MonoBehaviour
     void Update()
     {
         //Detect player is in range
-        if (isPlayerInRange && Input.GetKeyDown(KeyCode.F)) {
+        if (isPlayerInRange && Input.GetKeyDown(KeyCode.F))
+        {
 
-            if (!didDialogueStart) {
+            if (!didDialogueStart)
+            {
                 StartDialogue();
 
-            } else if (TextDialogue.text == dialogueLines[lineIndex]) {
+            }
+            else if (TextDialogue.text == dialogueLines[lineIndex])
+            {
                 NextDialogueLine();
             }
-            
+
         }
     }
 
 
-    void StartDialogue() {
+    void StartDialogue()
+    {
 
         didDialogueStart = true;
         dialoguePanel.SetActive(true);
@@ -61,7 +72,8 @@ public class DialogueController : MonoBehaviour
         StartCoroutine(ShowDialogLine());
     }
 
-    void NextDialogueLine() {
+    void NextDialogueLine()
+    {
 
         lineIndex++;
 
@@ -69,7 +81,8 @@ public class DialogueController : MonoBehaviour
         {
             StartCoroutine(ShowDialogLine());
         }
-        else {
+        else
+        {
             //If it steps here is because the are not more dialogues
             didDialogueStart = false;
             dialoguePanel.SetActive(false);
@@ -78,17 +91,41 @@ public class DialogueController : MonoBehaviour
 
             //Restart game time when dialogue starts
             Time.timeScale = 1.0F;
+
+            //EJECUTAR SIGUIENTE PUZZLE
+            switch (numeroPuzzle)
+            {
+                case 1:
+                    lv.NextScene(3);
+                    break;
+
+                case 2:
+                    lv.NextScene(4);
+                    break;
+
+                case 3:
+                    lv.NextScene(5);
+                    break;
+
+                default:
+                    return;
+            }
+
+
+
         }
     }
 
     //Corrutine 
-    IEnumerator ShowDialogLine() {
+    IEnumerator ShowDialogLine()
+    {
         TextDialogue.text = string.Empty;
 
         //We concatenate the text because we want the effect of progressice completation
         int count = 0;
 
-        foreach (char x in dialogueLines[lineIndex]) {
+        foreach (char x in dialogueLines[lineIndex])
+        {
             TextDialogue.text += x;
 
             count++;
@@ -96,12 +133,13 @@ public class DialogueController : MonoBehaviour
             {
                 TextInstruccion.enabled = true;
             }
-            else {
+            else
+            {
                 TextInstruccion.enabled = false;
             }
 
             //THe method ignores game time.
-                yield return new WaitForSecondsRealtime(waitTime);
+            yield return new WaitForSecondsRealtime(waitTime);
         }
     }
 
@@ -111,7 +149,8 @@ public class DialogueController : MonoBehaviour
     /// <param name="collision"></param>
     void OnTriggerEnter(Collider collision)
     {
-        if (collision.gameObject.CompareTag("Player")) {
+        if (collision.gameObject.CompareTag("Player"))
+        {
             isPlayerInRange = true!;
             dialogueExclamation.SetActive(true);
         }

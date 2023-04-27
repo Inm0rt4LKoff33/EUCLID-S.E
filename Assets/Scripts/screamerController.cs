@@ -6,7 +6,6 @@ using UnityEngine.UI;
 public class screamerController : MonoBehaviour
 {
 
-    [SerializeField]
     Image screamerImage;
 
     [SerializeField]
@@ -16,6 +15,13 @@ public class screamerController : MonoBehaviour
 
     private void Start()
     {
+        // Busca el objeto Canvas con el nombre "PlayerUI"
+        GameObject playerUICanvas = GameObject.Find("PlayerUI");
+
+        // Busca el objeto Image en el objeto Canvas encontrado anteriormente
+        screamerImage = playerUICanvas.GetComponentInChildren<Image>();
+
+
         canvasGroup = screamerImage.GetComponent<CanvasGroup>();
 
         // Si el objeto Image no tiene un componente CanvasGroup, lo añade
