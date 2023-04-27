@@ -52,7 +52,14 @@ public class Player : MonoBehaviour {
     bool onCombat;
 
     void Awake () {
-		controller = GetComponent <CharacterController>();
+
+        // Busca el objeto Canvas con el nombre "PlayerUI"
+        GameObject playerUICanvas = GameObject.Find("PlayerUI");
+
+        // Busca el objeto Image en el objeto Canvas encontrado anteriormente
+        sanityBar = playerUICanvas.GetComponentInChildren<Slider>();
+
+        controller = GetComponent <CharacterController>();
 		anim = gameObject.GetComponentInChildren<Animator>();
         gravity = Physics.gravity.y;
         sanityBar.value = maxSanity;
@@ -72,14 +79,8 @@ public class Player : MonoBehaviour {
         handleMove();
         handleRotation();
 
-        if (onCombat)
-        {
-            Invulnerability();
-        }
-        else
-        {
-            StartCoroutine(RecoverSanity());
-        }
+        Invulnerability();
+
     }
 
     private void Invulnerability()
@@ -234,8 +235,7 @@ public class Player : MonoBehaviour {
     {
         if (other.CompareTag("Alien"))
         {
-            onCombat = true;
-            if (invulnerabiliyCountdown <= 0 && onCombat)
+            if (invulnerabiliyCountdown <= 0)
             {
                 // Quitar sanidad en el slider
                 sanityBar.value -= 20;

@@ -26,7 +26,8 @@ public class recordadorManager : Singleton<recordadorManager>
 
     //POSICION DEL JUGADOR
 
-    public Vector3 GetUltimaPosicionJugador() {
+    public Vector3 GetUltimaPosicionJugador()
+    {
         return playerGanar.ultimaPosicion;
     }
 
@@ -76,4 +77,20 @@ public class recordadorManager : Singleton<recordadorManager>
     }
 
 
+
+    //VALORAR GANAR
+    public bool ganar()
+    {
+
+        bool llave1 = GetLlaveUno();
+        bool llave2 = GetLlaveDos();
+        bool llave3 = GetLlaveTres();
+
+        if (llave1 && llave2 && llave3)
+        {
+            return true;
+        }
+
+        return false;
+    }
 }
