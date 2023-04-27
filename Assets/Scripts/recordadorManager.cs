@@ -7,6 +7,9 @@ public class recordadorManager : Singleton<recordadorManager>
 {
     Ganar playerGanar;
 
+    bool primeraVezJugado = true;
+
+
     //CREAMOS UN PLAYER EN EL AWAKE HEREDADO
     public override void Awake()
     {
@@ -60,14 +63,17 @@ public class recordadorManager : Singleton<recordadorManager>
         switch (valor)
         {
             case 1:
+                primeraVezJugado = false;
                 playerGanar.LlaveUno = true;
                 break;
 
             case 2:
+                primeraVezJugado = false;
                 playerGanar.LlaveDos = true;
                 break;
 
             case 3:
+                primeraVezJugado = false;
                 playerGanar.LlaveTres = true;
                 break;
 
@@ -76,7 +82,12 @@ public class recordadorManager : Singleton<recordadorManager>
         }
     }
 
+    public bool getPrimeraVezJugando()
+    {
 
+        return primeraVezJugado;
+
+    }
 
     //VALORAR GANAR
     public bool ganar()

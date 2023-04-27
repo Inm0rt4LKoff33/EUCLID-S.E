@@ -14,6 +14,9 @@ public class DialogueController : MonoBehaviour
     [SerializeField]
     LevelManager lv;
 
+    [SerializeField]
+    GameObject[] spawnPointsPuzzles;
+
     //TextArea: Se usa unicamente para mejorar la visualizacion de los campos a rellenar desde la UI de desarrollo.
 
     [SerializeField, TextArea(4, 6)]
@@ -99,14 +102,14 @@ public class DialogueController : MonoBehaviour
 
                     lv.NextScene(3);
 
-                    posicion = new Vector3(-32.53F, -5.338103F, 64.94051F);
+                    posicion = spawnPointsPuzzles[0].transform.position;
                     recordadorManager.Instance.SetUltimaPosicionJugador(posicion);
                     recordadorManager.Instance.AgregarPuzzle(1);
                     break;
 
                 case 2:
 
-                    posicion = new Vector3(30.34F, -4.988103F, 54.5705F);
+                    posicion = spawnPointsPuzzles[1].transform.position;
                     recordadorManager.Instance.SetUltimaPosicionJugador(posicion);
                     lv.NextScene(4);
                     recordadorManager.Instance.AgregarPuzzle(2);
@@ -114,7 +117,7 @@ public class DialogueController : MonoBehaviour
 
                 case 3:
 
-                    posicion = new Vector3(11.66118F, -5.018103F, -4.76F);
+                    posicion = spawnPointsPuzzles[2].transform.position;
                     recordadorManager.Instance.SetUltimaPosicionJugador(posicion);
                     lv.NextScene(5);
                     recordadorManager.Instance.AgregarPuzzle(3);

@@ -1093,6 +1093,37 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 678540640}
   m_CullTransparentMesh: 1
+--- !u!1 &694560916
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 694560917}
+  m_Layer: 0
+  m_Name: SpawnPuzzleTres
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &694560917
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 694560916}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 136.78, y: 2.11, z: -40.91}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 13
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &698189423
 GameObject:
   m_ObjectHideFlags: 0
@@ -1563,6 +1594,10 @@ MonoBehaviour:
   numeroPuzzle: 1
   dialogueExclamation: {fileID: 344173087}
   lv: {fileID: 635235888}
+  spawnPointsPuzzles:
+  - {fileID: 2034983085}
+  - {fileID: 1238146760}
+  - {fileID: 694560916}
   dialogueLines:
   - "\xA1Cuidado humano! Has ingresado en nuestro territorio en esta nave espacial.
     Si deseas continuar, primero debes demostrar que eres astuto y capaz. "
@@ -1831,6 +1866,10 @@ MonoBehaviour:
   numeroPuzzle: 3
   dialogueExclamation: {fileID: 1340995648}
   lv: {fileID: 635235888}
+  spawnPointsPuzzles:
+  - {fileID: 2034983085}
+  - {fileID: 1238146760}
+  - {fileID: 694560916}
   dialogueLines:
   - "\xA1Cuidado humano! Has ingresado en nuestro territorio en esta nave espacial.
     Si deseas continuar, primero debes demostrar que eres astuto y capaz. "
@@ -1951,6 +1990,37 @@ Transform:
   - {fileID: 1038329901}
   m_Father: {fileID: 0}
   m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1238146760
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1238146761}
+  m_Layer: 0
+  m_Name: SpawnPuzzleDos
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1238146761
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1238146760}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 121.16, y: 1.77, z: -99.57}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1263544810
 PrefabInstance:
@@ -2275,6 +2345,10 @@ MonoBehaviour:
   numeroPuzzle: 2
   dialogueExclamation: {fileID: 336470887}
   lv: {fileID: 635235888}
+  spawnPointsPuzzles:
+  - {fileID: 2034983085}
+  - {fileID: 1238146760}
+  - {fileID: 694560916}
   dialogueLines:
   - "\xA1Cuidado humano! Has ingresado en nuestro territorio en esta nave espacial.
     Si deseas continuar, primero debes demostrar que eres astuto y capaz. "
@@ -2828,6 +2902,37 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a9b088f8741225a468c60cf559807528, type: 3}
+--- !u!1 &2034983085
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2034983086}
+  m_Layer: 0
+  m_Name: SpawnPuzzleUno
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2034983086
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2034983085}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 74.24, y: 1.66, z: -31.01}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 12
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &8523531758744327501
 PrefabInstance:
   m_ObjectHideFlags: 0
