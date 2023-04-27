@@ -43,3 +43,9 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: PlayerStats
+    uniqueID: 4036517207
+    locked: 0
+  - name: Menus
+    uniqueID: 668032887
+    locked: 0
