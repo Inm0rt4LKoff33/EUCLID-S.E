@@ -31,7 +31,7 @@ public class DialogueController : MonoBehaviour
     void Update()
     {
         //Detect player is in range
-        if (isPlayerInRange && Input.GetKeyDown(KeyCode.E)) {
+        if (isPlayerInRange && Input.GetKeyDown(KeyCode.F)) {
 
             if (!didDialogueStart) {
                 StartDialogue();
@@ -104,10 +104,10 @@ public class DialogueController : MonoBehaviour
     /// Start dialog
     /// </summary>
     /// <param name="collision"></param>
-    void OnTriggerEnter2D(Collider2D collision)
+    void OnTriggerEnter(Collider collision)
     {
         if (collision.gameObject.CompareTag("Player")) {
-            isPlayerInRange = true;
+            isPlayerInRange = true!;
             dialogueExclamation.SetActive(true);
         }
     }
@@ -116,7 +116,7 @@ public class DialogueController : MonoBehaviour
     /// Do not start dialogue
     /// </summary>
     /// <param name="collision"></param>
-    void OnTriggerExit2D(Collider2D collision)
+    void OnTriggerExit(Collider collision)
     {
         isPlayerInRange = false;
         dialogueExclamation.SetActive(false);
