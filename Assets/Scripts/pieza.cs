@@ -15,7 +15,7 @@ public class pieza : MonoBehaviour
         PosicionCorrecta = transform.position;
 
         //LA CAMBIAMOS DE LUGAR PARA DESORDENARLA
-        transform.position = new Vector3(Random.Range(5f, 11f), Random.Range(2.5f, -7));
+        transform.position = new Vector3(Random.Range(-10f, -16f), Random.Range(2.5f, -7));
     }
 
     void Update()

@@ -17,6 +17,9 @@ public class DialogueController : MonoBehaviour
     GameObject dialoguePanel;
 
     [SerializeField]
+    GameObject imagen;
+
+    [SerializeField]
     TMP_Text TextDialogue;
 
     [SerializeField]
@@ -48,6 +51,7 @@ public class DialogueController : MonoBehaviour
 
         didDialogueStart = true;
         dialoguePanel.SetActive(true);
+        imagen.SetActive(true);
         dialogueExclamation.SetActive(false);
         lineIndex = 0;
 
@@ -69,6 +73,7 @@ public class DialogueController : MonoBehaviour
             //If it steps here is because the are not more dialogues
             didDialogueStart = false;
             dialoguePanel.SetActive(false);
+            imagen.SetActive(false);
             dialogueExclamation.SetActive(true);
 
             //Restart game time when dialogue starts
