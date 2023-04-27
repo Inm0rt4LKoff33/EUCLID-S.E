@@ -23,7 +23,7 @@ public class LoadSceneController : MonoBehaviour
         {
             if (currentScene.buildIndex == 1)
             {
-                SceneManager.LoadScene(0);
+                SceneManager.LoadScene(2);
             }
             else
             {

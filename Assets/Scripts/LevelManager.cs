@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class LevelManager : MonoBehaviour
 {
+
     /// <summary>
     /// PROXIMA SCENA
     /// </summary>
@@ -13,6 +14,12 @@ public class LevelManager : MonoBehaviour
         //TRAER EL INDICE DE LA SCENA ACTUAL
         int currectSceneIndex = SceneManager.GetActiveScene().buildIndex;
         SceneManager.LoadScene(currectSceneIndex + 1);
+    }
+
+
+    public int escenaActual() {
+        int valor = SceneManager.GetActiveScene().buildIndex;
+        return valor;   
     }
 
 
