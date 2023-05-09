@@ -1,5 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections;
 using UnityEngine;
 
 public class ThirdPersonCamera : MonoBehaviour
@@ -7,9 +6,9 @@ public class ThirdPersonCamera : MonoBehaviour
     private const float Y_ANGLE_MIN = 0.0f;
     private const float Y_ANGLE_MAX = 50.0f;
 
-    public Transform lookAt;
+    public Transform targetLookAt;
     public Transform camTransform;
-    public float distance = 5.0f;
+    public float offset = 5.0f;
 
     private float currentX = 0.0f;
     private float currentY = 45.0f;
@@ -31,9 +30,9 @@ public class ThirdPersonCamera : MonoBehaviour
 
     private void LateUpdate()
     {
-        Vector3 dir = new Vector3(0, 0, -distance);
+        Vector3 dir = new Vector3(0, 0, -offset);
         Quaternion rotation = Quaternion.Euler(currentY, currentX, 0);
-        camTransform.position = lookAt.position + rotation * dir;
-        camTransform.LookAt(lookAt.position);
+        camTransform.position = targetLookAt.position + rotation * dir;
+        camTransform.LookAt(targetLookAt.position);
     }
 }
